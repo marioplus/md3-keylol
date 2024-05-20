@@ -1,5 +1,5 @@
 import {defineConfig} from 'vite'
-import monkey from 'vite-plugin-monkey'
+import monkey, {cdn} from 'vite-plugin-monkey'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,7 +12,16 @@ export default defineConfig({
                 homepage: 'https://github.com/marioplus',
                 namespace: 'https://github.com/marioplus/md-keylol',
                 match: ['https://keylol.com/*'],
+                'run-at': 'document-start'
             },
+            build: {
+                externalGlobals: {
+                    mdui: cdn.jsdelivr('mdui', 'mdui.global.min.js'),
+                },
+                externalResource: {
+                    'mdui/mdui.css': cdn.jsdelivr(),
+                }
+            }
         }),
     ],
 })

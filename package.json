@@ -9,8 +9,13 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "less": "^4.2.0",
     "typescript": "^5.0.2",
     "vite": "^4.2.1",
     "vite-plugin-monkey": "^3.1.1"
+  },
+  "dependencies": {
+    "@material/material-color-utilities": "^0.2.7",
+    "mdui": "^2.1.1"
   }
 }
