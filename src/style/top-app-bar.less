@@ -1,4 +1,4 @@
-@container-height: 64px;
+@container-height: 4rem;
 
 #md3kl() {
   .button {
@@ -31,18 +31,54 @@
   }
 }
 
-// 隐藏空元素
-#nav-menu > ul > li:nth-child(6) {
-  display: none;
+// logo
+
+
+// 头像
+#nav-menu {
+  & > ul > li:nth-child(6) {
+    order: 20;
+    // 右侧的宽度
+    width: 400px;
+  }
 }
 
 #nav-menu {
-  height: 4rem;
+  height: @container-height;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
-#nav-menu > ul > li {
-  #md3kl.button()
+#nav-menu > ul {
+  display: flex;
+
+  & > li > ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  li {
+    min-width: 3rem;
+    height: 2.5rem;
+    font-size: var(--md3kl-typescale-label-large-size);
+    font-weight: var(--md3kl-typescale-label-large-weight);
+
+    a, span {
+      padding: initial !important;
+      color: rgb(var(--md3kl-color-on-surface));
+      font-size: var(--md3kl-typescale-label-large-size);
+    }
+  }
+
+  & > li {
+    min-width: 3rem;
+    height: 2.5rem;
+    font-size: var(--md3kl-typescale-label-large-size);
+    font-weight: var(--md3kl-typescale-label-large-weight);
+
+    & > a:after {
+      display: none !important;
+    }
+  }
 }
