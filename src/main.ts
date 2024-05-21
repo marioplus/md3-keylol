@@ -1,25 +1,33 @@
 // @ts-ignore isolatedModules
-import {applyTheme, generateTheme} from './m3-utils.ts'
+import {applyTheme, generateTheme} from './utils/m3-utils.ts'
 
-// 全局样式
-if (window.location.host === 'keylol.com') {
-    import('./style/design-tokens/color.less')
-    import('./style/design-tokens/elevation.less')
-    import('./style/design-tokens/motion.less')
-    import('./style/design-tokens/s.less')
+import colorLess from './style/design-tokens/color.less?inline'
+import elevationLess from './style/design-tokens/elevation.less?inline'
+import motionLess from './style/design-tokens/motion.less?inline'
+import sizeLess from './style/design-tokens/size.less?inline'
 
-    import('./style/top-app-bar.less')
-}
+import homeLess from './style/home.less?inline'
+import appBarLess from './style/top-app-bar.less?inline'
+
+import {styleLoader} from './utils/css-utils'
+
+styleLoader('global', elevationLess, motionLess, sizeLess)
+styleLoader('theme', colorLess)
 
 // 首页
-const homePathNames = ['/', '/forum.php']
-if (homePathNames.concat(window.location.pathname)) {
-    console.log('mdkl-home')
-    import('./style/home.less')
+const homePathNames = new Set(['/', '/forum.php'])
+if (homePathNames.has(window.location.pathname)) {
+    console.log('md3kl-home', window.location.pathname)
+    styleLoader('home', homeLess)
+} else {
+    styleLoader('other', appBarLess)
 }
 
 const theme = generateTheme('#0F75E3', false)
 applyTheme(theme)
 
-window.mdkl.generateTheme = generateTheme
-window.mdkl.applyTheme = applyTheme
+// @ts-ignore
+window.generateTheme = generateTheme
+// @ts-ignore
+window.applyTheme = applyTheme
+
